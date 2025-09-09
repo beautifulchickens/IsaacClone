@@ -113,8 +113,9 @@ public class Enemy extends Entity {
     private void checkPlayerCollision() {
         Player player = EntityManager.getInstance().getPlayer();
         if (player != null && collidesWith(player) && player.isAlive()) {
-            // 敌人接触到玩家，造成伤害
+            // 敌人接触到玩家，造成伤害 T
             player.takeDamage((int)damage);
+            System.out.println("你受伤了!");
         }
     }
 
@@ -125,7 +126,7 @@ public class Enemy extends Entity {
 
     @Override
     public void render(GraphicsContext gc) {
-        // 根据敌人类型绘制不同颜色
+        // 根据敌人类型绘制不同颜色 TODO:添加素材
         switch (type) {
             case NORMAL:
                 gc.setFill(Color.GREEN);
@@ -151,7 +152,8 @@ public class Enemy extends Entity {
         health -= damage;
         if (health <= 0) {
             setAlive(false);
-            // 可以在这里添加敌人死亡时的逻辑，如掉落道具等
+            // TODO:在这里添加敌人死亡时的逻辑
+            System.out.println("One enemy is killed");
         }
     }
 

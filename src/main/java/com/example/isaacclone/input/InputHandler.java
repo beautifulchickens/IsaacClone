@@ -7,6 +7,7 @@ import java.util.Map;
 
 public class InputHandler {
     // 定义游戏中使用的按键
+    //TODO:修改发射为通过小键盘方向键控制
     public enum Key {
         UP, DOWN, LEFT, RIGHT, SHOOT, NEXT_ROOM, PAUSE
     }
@@ -41,11 +42,10 @@ public class InputHandler {
     public void handleKeyPress(KeyEvent event) {
         KeyCode code = event.getCode();
 
-        System.out.println("按下键: " + event.getCode()); // 日志
-
         // 检查按下的键是否在我们的映射中
         for (Map.Entry<Key, KeyCode> entry : keyMap.entrySet()) {
             if (entry.getValue() == code) {
+                System.out.println("按下键: " + code); // 输出日志
                 keyStates.put(entry.getKey(), true);
                 break;
             }

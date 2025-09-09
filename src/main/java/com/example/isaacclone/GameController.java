@@ -1,5 +1,6 @@
 package com.example.isaacclone;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -36,7 +37,7 @@ public class GameController {
 
         // 初始化游戏组件
         inputHandler = new InputHandler();
-        entityManager = new EntityManager();
+        entityManager = EntityManager.getInstance();
         currentRoom = RoomGenerator.generateRandomRoom();
 
         // 创建玩家
@@ -122,15 +123,19 @@ public class GameController {
     }
 
     private void updateHUD() {
-        // 更新玩家状态显示
-        healthLabel.setText("生命值: " + player.getHealth());
-        damageLabel.setText("伤害: " + player.getDamage());
-        speedLabel.setText("速度: " + player.getSpeed());
 
-        // 更新房间信息
-        roomLabel.setText("房间: " + currentRoom.getRoomNumber());
-        enemiesLabel.setText("敌人: " + currentRoom.getRemainingEnemies(entityManager) +
-                "/" + currentRoom.getTotalEnemies());
+        // 使用Platform.runLater()将UI操作提交到FX应用线程
+        Platform.runLater(() -> {
+            // 更新玩家状态显示
+            healthLabel.setText("生命值: " + player.getHealth());
+            damageLabel.setText("伤害: " + player.getDamage());
+            speedLabel.setText("速度: " + player.getSpeed());
+
+            // 更新房间信息
+            roomLabel.setText("房间: " + currentRoom.getRoomNumber());
+            enemiesLabel.setText("敌人: " + currentRoom.getRemainingEnemies(entityManager) +
+                    "/" + currentRoom.getTotalEnemies());
+        });
     }
 
     private void handleKeyPress(KeyEvent event) {

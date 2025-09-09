@@ -62,6 +62,8 @@ public class Room {
     }
 
     private void setupDoors() {
+        //TODO:需要添加返回前一房间的门的逻辑,
+
         // 随机添加门（至少有一个出口）
         Random random = new Random();
 
@@ -111,6 +113,7 @@ public class Room {
             // 随机选择敌人类型
             if (type == RoomType.BOSS) {
                 // BOSS房间生成特殊BOSS（暂时用STRONG类型代替）
+                //TODO
                 enemyType = Enemy.EnemyType.STRONG;
             } else {
                 int rand = random.nextInt(10);
@@ -159,7 +162,11 @@ public class Room {
 
     // 渲染房间
     public void render(GraphicsContext gc) {
+
+        //TODO:绘制背景
+
         // 绘制墙壁
+        //TODO:更改为图片(可选)
         gc.setFill(Color.DARKGRAY);
         gc.fillRect(leftWall, topWall, rightWall - leftWall, topWall); // 上墙
         gc.fillRect(leftWall, bottomWall, rightWall - leftWall, topWall); // 下墙

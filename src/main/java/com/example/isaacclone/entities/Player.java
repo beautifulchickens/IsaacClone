@@ -12,6 +12,8 @@ public class Player extends Entity {
     private double damage;
     private double fireRate; // 射击频率（越低越快）
     private double fireCooldown; // 射击冷却时间
+    private double fireRange;//射程
+    //TODO:实现道具、炸弹、钥匙逻辑（可选）
 
     public Player(double x, double y) {
         super(x, y, 30, 30);
@@ -21,6 +23,7 @@ public class Player extends Entity {
         this.speed = 2.5;
         this.fireRate = 20;
         this.fireCooldown = 0;
+        //this.fireRange = 10;
     }
 
     @Override
@@ -73,7 +76,7 @@ public class Player extends Entity {
     private void handleShooting(InputHandler input, double delta) {
         // 检查是否可以射击（冷却时间结束且按下射击键）
         if (fireCooldown <= 0 && input.isKeyPressed(InputHandler.Key.SHOOT)) {
-            // 创建子弹（暂时向右侧发射，后续可以改为鼠标瞄准）
+            // 创建子弹（暂时向右侧发射击）TODO:修改发射子弹逻辑
             Bullet bullet = new Bullet(x + width, y + height/2 - 2, 10, 4, damage, 5, 0);
             EntityManager.getInstance().addEntity(bullet);
 
@@ -90,7 +93,7 @@ public class Player extends Entity {
 
     @Override
     public void render(GraphicsContext gc) {
-        // 绘制玩家（红色圆形）
+        // 绘制玩家（红色圆形） TODO:添加素材
         gc.setFill(Color.RED);
         gc.fillOval(x, y, width, height);
     }
@@ -100,7 +103,8 @@ public class Player extends Entity {
         health = Math.max(0, health - amount);
         if (health <= 0) {
             setAlive(false);
-            // 可以在这里添加死亡逻辑
+            // TODO:添加死亡逻辑
+            System.out.println("GameOver");
         }
     }
 

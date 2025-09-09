@@ -30,6 +30,10 @@ public class EntityManager {
     // 添加实体
     public void addEntity(Entity entity) {
         toAdd.add(entity);
+
+//        if (entity instanceof Bullet) {
+////            System.out.println("子弹已添加到实体管理器");
+//        }
     }
 
     // 更新所有实体
@@ -52,6 +56,7 @@ public class EntityManager {
     public void render(GraphicsContext gc) {
         for (Entity entity : entities) {
             if (entity.isAlive()) {
+                //System.out.println(entity);
                 entity.render(gc);
             }
         }

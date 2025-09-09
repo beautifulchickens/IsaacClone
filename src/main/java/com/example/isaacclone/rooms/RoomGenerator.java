@@ -8,6 +8,8 @@ public class RoomGenerator {
 
     // 生成随机房间
     public static Room generateRandomRoom() {
+        //TODO:需修改为通过DFS算法扩展房间
+
         // 房间边界（基于600x500的游戏画布）
         int leftWall = 0;
         int rightWall = 600;
@@ -24,6 +26,7 @@ public class RoomGenerator {
 
     // 随机选择房间类型
     private static Room.RoomType getRandomRoomType() {
+        //TODO:修改生成逻辑,宝藏房至少1个至多3个，BOSS房固定1个
         int rand = random.nextInt(100);
 
         // 概率分布：普通房间70%，宝藏房间10%，BOSS房间5%，商店5%，秘密房间10%

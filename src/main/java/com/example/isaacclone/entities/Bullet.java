@@ -40,6 +40,7 @@ public class Bullet extends Entity {
 
     @Override
     public void update(double delta, InputHandler input, Room room) {
+
         // 移动子弹
         x += directionX * speed * delta;
         y += directionY * speed * delta;
@@ -58,7 +59,12 @@ public class Bullet extends Entity {
         if (x < room.getLeftWall() || x + width > room.getRightWall() ||
                 y < room.getTopWall() || y + height > room.getBottomWall()) {
             setAlive(false);
+
+//            System.out.println("子弹超出边界销毁：x=" + x + ", y=" + y +
+//                    "，边界：(" + room.getLeftWall() + "," + room.getTopWall() +
+//                    ")-(" + room.getRightWall() + "," + room.getBottomWall() + ")");
         }
+
     }
 
     private void checkEnemyCollision() {
