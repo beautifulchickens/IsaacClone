@@ -9,7 +9,8 @@ public class InputHandler {
     // 定义游戏中使用的按键
     //TODO:修改发射为通过小键盘方向键控制
     public enum Key {
-        UP, DOWN, LEFT, RIGHT, SHOOT, NEXT_ROOM, PAUSE
+        UP, DOWN, LEFT, RIGHT, SHOOT, NEXT_ROOM, PAUSE,
+        SHOOT_LEFT, SHOOT_UP, SHOOT_RIGHT, SHOOT_DOWN
     }
 
     // 按键状态映射（是否按下）
@@ -34,6 +35,10 @@ public class InputHandler {
         keyMap.put(Key.SHOOT, KeyCode.SPACE);
         keyMap.put(Key.NEXT_ROOM, KeyCode.E);
         keyMap.put(Key.PAUSE, KeyCode.ESCAPE);
+        keyMap.put(Key.SHOOT_UP, KeyCode.UP);
+        keyMap.put(Key.SHOOT_DOWN, KeyCode.DOWN);
+        keyMap.put(Key.SHOOT_LEFT, KeyCode.LEFT);
+        keyMap.put(Key.SHOOT_RIGHT, KeyCode.RIGHT);
 
         System.out.println(keyMap);
     }

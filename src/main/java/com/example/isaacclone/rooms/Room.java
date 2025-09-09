@@ -34,8 +34,13 @@ public class Room {
 
     // 门类
     public static class Door {
+
         private DoorPosition position;
         private boolean isOpen;
+        private int lastRoom;
+        private int nextRoom; //记录门两侧的房间
+
+
 
         public Door(DoorPosition position) {
             this.position = position;

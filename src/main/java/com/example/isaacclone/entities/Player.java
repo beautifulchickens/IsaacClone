@@ -6,6 +6,8 @@ import javafx.scene.paint.Color;
 import com.example.isaacclone.input.InputHandler;
 import com.example.isaacclone.rooms.Room;
 
+import java.util.Random;
+
 public class Player extends Entity {
     private int health;
     private int maxHealth;
@@ -13,6 +15,7 @@ public class Player extends Entity {
     private double fireRate; // 射击频率（越低越快）
     private double fireCooldown; // 射击冷却时间
     private double fireRange;//射程
+    private Random rand = new Random();
     //TODO:实现道具、炸弹、钥匙逻辑（可选）
 
     public Player(double x, double y) {
@@ -75,11 +78,33 @@ public class Player extends Entity {
 
     private void handleShooting(InputHandler input, double delta) {
         // 检查是否可以射击（冷却时间结束且按下射击键）
-        if (fireCooldown <= 0 && input.isKeyPressed(InputHandler.Key.SHOOT)) {
-            // 创建子弹（暂时向右侧发射击）TODO:修改发射子弹逻辑
-            Bullet bullet = new Bullet(x + width, y + height/2 - 2, 10, 4, damage, 5, 0);
-            EntityManager.getInstance().addEntity(bullet);
-
+        if (fireCooldown <= 0)
+        {
+            double randAngle = rand.nextDouble()*30.0-15.0;
+            if(input.isKeyPressed(InputHandler.Key.SHOOT_RIGHT))
+            {
+                // 创建子弹（暂时向右侧发射击）TODO:修改发射子弹逻辑
+                Bullet bullet = new Bullet(x + width, y + height/2 - 2, 10, 4, damage, 5, randAngle);
+                EntityManager.getInstance().addEntity(bullet);
+            }
+            else if(input.isKeyPressed(InputHandler.Key.SHOOT_LEFT))
+            {
+                randAngle += 180.0;
+                Bullet bullet = new Bullet(x - width, y + height/2 - 2, 10, 4, damage, 5, randAngle);
+                EntityManager.getInstance().addEntity(bullet);
+            }
+            else if(input.isKeyPressed(InputHandler.Key.SHOOT_UP))
+            {
+                randAngle += 270.0;
+                Bullet bullet = new Bullet(x + width/2, y - height, 10, 4, damage, 5, randAngle);
+                EntityManager.getInstance().addEntity(bullet);
+            }
+            else if(input.isKeyPressed(InputHandler.Key.SHOOT_DOWN))
+            {
+                randAngle += 90.0;
+                Bullet bullet = new Bullet(x + width/2, y + height, 10, 4, damage, 5, randAngle);
+                EntityManager.getInstance().addEntity(bullet);
+            }
             // 重置冷却时间
             fireCooldown = fireRate;
         }
